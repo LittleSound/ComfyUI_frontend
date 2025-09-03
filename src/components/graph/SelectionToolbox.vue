@@ -5,6 +5,7 @@
       header: 'hidden',
       content: 'p-0 flex flex-row'
     }"
+    @wheel="canvasInteractions.handleWheel"
   >
     <ExecuteButton />
     <ColorPickerButton />
@@ -14,7 +15,7 @@
     <MaskEditorButton />
     <ConvertToSubgraphButton />
     <DeleteButton />
-    <RefreshButton />
+    <RefreshSelectionButton />
     <ExtensionCommandButton
       v-for="command in extensionToolboxCommands"
       :key="command.id"
@@ -38,7 +39,8 @@ import ExtensionCommandButton from '@/components/graph/selectionToolbox/Extensio
 import HelpButton from '@/components/graph/selectionToolbox/HelpButton.vue'
 import MaskEditorButton from '@/components/graph/selectionToolbox/MaskEditorButton.vue'
 import PinButton from '@/components/graph/selectionToolbox/PinButton.vue'
-import RefreshButton from '@/components/graph/selectionToolbox/RefreshButton.vue'
+import RefreshSelectionButton from '@/components/graph/selectionToolbox/RefreshSelectionButton.vue'
+import { useCanvasInteractions } from '@/composables/graph/useCanvasInteractions'
 import { useExtensionService } from '@/services/extensionService'
 import { type ComfyCommandImpl, useCommandStore } from '@/stores/commandStore'
 import { useCanvasStore } from '@/stores/graphStore'
@@ -46,6 +48,7 @@ import { useCanvasStore } from '@/stores/graphStore'
 const commandStore = useCommandStore()
 const canvasStore = useCanvasStore()
 const extensionService = useExtensionService()
+const canvasInteractions = useCanvasInteractions()
 
 const extensionToolboxCommands = computed<ComfyCommandImpl[]>(() => {
   const commandIds = new Set<string>(

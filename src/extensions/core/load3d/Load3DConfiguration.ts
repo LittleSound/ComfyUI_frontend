@@ -1,7 +1,6 @@
-import type { IBaseWidget } from '@comfyorg/litegraph/dist/types/widgets'
-
 import Load3d from '@/extensions/core/load3d/Load3d'
 import Load3dUtils from '@/extensions/core/load3d/Load3dUtils'
+import type { IBaseWidget } from '@/lib/litegraph/src/types/widgets'
 import { api } from '@/scripts/api'
 import { useSettingStore } from '@/stores/settingStore'
 
@@ -159,12 +158,6 @@ class Load3DConfiguration {
       )
 
       this.load3d.setEdgeThreshold(edgeThreshold)
-
-      const texturePath = this.load3d.loadNodeProperty('Texture', null)
-
-      if (texturePath) {
-        await this.load3d.applyTexture(texturePath)
-      }
 
       if (isFirstLoad && cameraState && typeof cameraState === 'object') {
         try {

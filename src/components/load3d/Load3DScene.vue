@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { LGraphNode } from '@comfyorg/litegraph'
 import { onMounted, onUnmounted, ref, toRaw, watch } from 'vue'
 
 import LoadingOverlay from '@/components/load3d/LoadingOverlay.vue'
@@ -17,6 +16,7 @@ import {
   UpDirection
 } from '@/extensions/core/load3d/interfaces'
 import { t } from '@/i18n'
+import { LGraphNode } from '@/lib/litegraph/src/litegraph'
 import type { CustomInputSpec } from '@/schemas/nodeDef/nodeDefSchemaV2'
 import { useLoad3dService } from '@/services/load3dService'
 
@@ -69,9 +69,6 @@ const eventConfig = {
   exportLoadingEnd: () => {
     loadingOverlayRef.value?.endLoading()
   },
-  textureLoadingStart: () =>
-    loadingOverlayRef.value?.startLoading(t('load3d.applyingTexture')),
-  textureLoadingEnd: () => loadingOverlayRef.value?.endLoading(),
   recordingStatusChange: (value: boolean) =>
     emit('recordingStatusChange', value)
 } as const

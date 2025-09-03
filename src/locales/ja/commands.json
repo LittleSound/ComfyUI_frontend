@@ -71,6 +71,9 @@
   "Comfy_Canvas_ToggleLock": {
     "label": "キャンバスのロックを切り替える"
   },
+  "Comfy_Canvas_ToggleMinimap": {
+    "label": "キャンバス ミニマップ切り替え"
+  },
   "Comfy_Canvas_ToggleSelectedNodes_Bypass": {
     "label": "選択したノードのバイパス/バイパス解除"
   },
@@ -158,6 +161,12 @@
   "Comfy_Manager_ToggleManagerProgressDialog": {
     "label": "プログレスダイアログの切り替え"
   },
+  "Comfy_MaskEditor_BrushSize_Decrease": {
+    "label": "マスクエディタでブラシサイズを縮小"
+  },
+  "Comfy_MaskEditor_BrushSize_Increase": {
+    "label": "マスクエディタでブラシサイズを大きくする"
+  },
   "Comfy_MaskEditor_OpenMaskEditor": {
     "label": "選択したノードのマスクエディタを開く"
   },
@@ -226,6 +235,15 @@
   },
   "Workspace_ToggleBottomPanelTab_logs-terminal": {
     "label": "ログパネル下部の切り替え"
+  },
+  "Workspace_ToggleBottomPanelTab_shortcuts-essentials": {
+    "label": "必須な下部パネルを切り替え"
+  },
+  "Workspace_ToggleBottomPanelTab_shortcuts-view-controls": {
+    "label": "表示コントロール下部パネルの切り替え"
+  },
+  "Workspace_ToggleBottomPanel_Shortcuts": {
+    "label": "キーバインドダイアログを表示"
   },
   "Workspace_ToggleFocusMode": {
     "label": "フォーカスモードの切り替え"

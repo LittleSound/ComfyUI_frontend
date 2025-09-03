@@ -1,29 +1,45 @@
 <template>
-  <div class="flex flex-col gap-1">
-    <label v-if="widget.name" class="text-sm opacity-80">{{
-      widget.name
-    }}</label>
-    <TreeSelect v-model="value" v-bind="filteredProps" :disabled="readonly" />
-  </div>
+  <WidgetLayoutField :widget="widget">
+    <TreeSelect
+      v-model="localValue"
+      v-bind="filteredProps"
+      :disabled="readonly"
+      class="w-full text-xs"
+      size="small"
+      @update:model-value="onChange"
+    />
+  </WidgetLayoutField>
 </template>
 
 <script setup lang="ts">
 import TreeSelect from 'primevue/treeselect'
 import { computed } from 'vue'
 
+import { useWidgetValue } from '@/composables/graph/useWidgetValue'
+import WidgetLayoutField from '@/renderer/extensions/vueNodes/widgets/components/layout/WidgetLayoutField.vue'
 import type { SimplifiedWidget } from '@/types/simplifiedWidget'
 import {
   PANEL_EXCLUDED_PROPS,
   filterWidgetProps
 } from '@/utils/widgetPropFilter'
 
-const value = defineModel<any>({ required: true })
-
 const props = defineProps<{
   widget: SimplifiedWidget<any>
+  modelValue: any
   readonly?: boolean
 }>()
 
+const emit = defineEmits<{
+  'update:modelValue': [value: any]
+}>()
+
+// Use the composable for consistent widget value handling
+const { localValue, onChange } = useWidgetValue({
+  widget: props.widget,
+  modelValue: props.modelValue,
+  defaultValue: null,
+  emit
+})
 // TreeSelect specific excluded props
 const TREE_SELECT_EXCLUDED_PROPS = [
   ...PANEL_EXCLUDED_PROPS,

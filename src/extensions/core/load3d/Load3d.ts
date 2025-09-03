@@ -1,6 +1,6 @@
-import { LGraphNode } from '@comfyorg/litegraph'
 import * as THREE from 'three'
 
+import { LGraphNode } from '@/lib/litegraph/src/litegraph'
 import { CustomInputSpec } from '@/schemas/nodeDef/nodeDefSchemaV2'
 
 import { CameraManager } from './CameraManager'
@@ -290,23 +290,6 @@ class Load3d {
       throw error
     } finally {
       this.eventManager.emitEvent('exportLoadingEnd', null)
-    }
-  }
-
-  async applyTexture(texturePath: string): Promise<void> {
-    if (!this.modelManager.currentModel) {
-      throw new Error('No model to apply texture to')
-    }
-
-    this.eventManager.emitEvent('textureLoadingStart', null)
-
-    try {
-      await this.modelManager.applyTexture(texturePath)
-    } catch (error) {
-      console.error('Error applying texture:', error)
-      throw error
-    } finally {
-      this.eventManager.emitEvent('textureLoadingEnd', null)
     }
   }
 

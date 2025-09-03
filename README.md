@@ -4,6 +4,8 @@
 
 **Official front-end implementation of [ComfyUI](https://github.com/comfyanonymous/ComfyUI).**
 
+<!-- Testing automatic backport workflow -->
+
 [![Website][website-shield]][website-url]
 [![Discord][discord-shield]][discord-url]
 [![Matrix][matrix-shield]][matrix-url]
@@ -524,6 +526,10 @@ Here are some ways to get involved:
 
 Have another idea? Drop into Discord or open an issue, and let's chat!
 
+### Architecture Decision Records
+
+We document significant architectural decisions using ADRs (Architecture Decision Records). See [docs/adr/](docs/adr/) for all ADRs and the template for creating new ones.
+
 ## Development
 
 ### Prerequisites & Technology Stack
@@ -686,16 +692,23 @@ Component test verifies Vue components in `src/components/`.
 
 Playwright test verifies the whole app. See <https://github.com/Comfy-Org/ComfyUI_frontend/blob/main/browser_tests/README.md> for details.
 
+### Custom Icons
+
+The project supports custom SVG icons through the unplugin-icons system. Custom icons are stored in `src/assets/icons/custom/` and can be used as Vue components with the `i-comfy:` prefix.
+
+For detailed instructions on adding and using custom icons, see [src/assets/icons/README.md](src/assets/icons/README.md).
+
 ### litegraph.js
 
-This repo is using litegraph package hosted on <https://github.com/Comfy-Org/litegraph.js>. Any changes to litegraph should be submitted in that repo instead.
+Since Aug 5, 2025, litegraph.js is now integrated directly into this repository. It was merged using git subtree to preserve the complete commit history ([PR #4667](https://github.com/Comfy-Org/ComfyUI_frontend/pull/4667), [ADR](docs/adr/0001-merge-litegraph-into-frontend.md)).
 
-#### Test litegraph.js changes
+#### Important Notes
 
-- Run `npm link` in the local litegraph repo.
-- Run `npm link @comfyorg/litegraph` in this repo.
+- **Issue References**: Commits from the original litegraph repository may contain issue/PR numbers (e.g., #4667) that refer to issues/PRs in the original litegraph.js repository, not this one.
+- **File Paths**: When viewing historical commits, file paths may show the original structure before the subtree merge. In those cases, just consider the paths relative to the new litegraph folder.
+- **Contributing**: All litegraph modifications should now be made directly in this repository.
 
-This will replace the litegraph package in this repo with the local litegraph repo.
+The original litegraph repository (<https://github.com/Comfy-Org/litegraph.js>) is now archived.
 
 ### i18n
 
