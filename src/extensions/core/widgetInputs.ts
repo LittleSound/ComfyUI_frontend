@@ -17,6 +17,7 @@ import type { InputSpec } from '@/schemas/nodeDefSchema'
 import { app } from '@/scripts/app'
 import { ComfyWidgets, addValueControlWidgets } from '@/scripts/widgets'
 import { CONFIG, GET_CONFIG } from '@/services/litegraphService'
+import type { ComfyExtension } from '@/types/comfy'
 import { mergeInputSpec } from '@/utils/nodeDefUtil'
 import { applyTextReplacements } from '@/utils/searchAndReplace'
 import { isPrimitiveNode } from '@/utils/typeGuardUtil'
@@ -509,7 +510,7 @@ export function mergeIfValid(
   return { customConfig: customSpec?.[1] ?? {} }
 }
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.WidgetInputs',
   async beforeRegisterNodeDef(nodeType, _nodeData, app) {
     // @ts-expect-error adding extra property
@@ -620,4 +621,6 @@ app.registerExtension({
     )
     PrimitiveNode.category = 'utils'
   }
-})
+}
+
+export default extension

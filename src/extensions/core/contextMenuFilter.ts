@@ -1,10 +1,10 @@
 import { LGraphCanvas, LiteGraph, isComboWidget } from '@comfyorg/litegraph'
 
-import { app } from '../../scripts/app'
+import type { ComfyExtension } from '@/types/comfy'
 
 // Adds filtering to combo context menus
 
-const ext = {
+const ext: ComfyExtension = {
   name: 'Comfy.ContextMenuFilter',
   init() {
     const ctxMenu = LiteGraph.ContextMenu
@@ -173,4 +173,4 @@ const ext = {
   }
 }
 
-app.registerExtension(ext)
+export default ext

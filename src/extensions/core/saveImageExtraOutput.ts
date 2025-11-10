@@ -1,6 +1,5 @@
+import type { ComfyExtension } from '@/types/comfy'
 import { applyTextReplacements } from '@/utils/searchAndReplace'
-
-import { app } from '../../scripts/app'
 
 const saveNodeTypes = new Set([
   'SaveImage',
@@ -18,7 +17,7 @@ const saveNodeTypes = new Set([
 
 // Use widget values and dates in output filenames
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.SaveImageExtraOutput',
   async beforeRegisterNodeDef(nodeType, nodeData, app) {
     if (saveNodeTypes.has(nodeData.name)) {
@@ -57,4 +56,6 @@ app.registerExtension({
       }
     }
   }
-})
+}
+
+export default extension

@@ -19,9 +19,21 @@ Extensions in ComfyUI are modular JavaScript modules that extend and enhance the
 
 ComfyUI's extension system follows these key principles:
 
-1. **Registration-based:** Extensions must register themselves with the application using `app.registerExtension()`
-2. **Hook-driven:** Extensions interact with the system through predefined hooks
-3. **Non-intrusive:** Extensions should avoid directly modifying core objects where possible
+1. **Declarative Export:** Extensions export their configuration objects instead of executing side effects
+2. **Manifest-Driven:** Extensions are registered via a manifest file for better tree-shaking
+3. **Lazy Loading:** Extensions can be loaded on-demand based on activation events
+4. **Hook-driven:** Extensions interact with the system through predefined hooks
+5. **Non-intrusive:** Extensions should avoid directly modifying core objects where possible
+
+### New Architecture (2025)
+
+The extension system has been refactored to support:
+- **Tree-shaking**: Unused extensions can be eliminated during build
+- **Lazy loading**: Extensions load only when needed
+- **Activation events**: Control when extensions are loaded (e.g., `onStartup`, `onNode:*`, `onCommand:*`)
+- **Dependency management**: Extensions can declare dependencies on other extensions
+
+See `extensionManifest.ts` for the complete list of extensions and their metadata.
 
 ## Core Extensions List
 
@@ -117,14 +129,18 @@ When developing or modifying extensions, follow these best practices:
 
 ### Extension Registration
 
-Extensions are registered using the `app.registerExtension()` method:
+#### New Pattern (Declarative Export)
 
-```javascript
-app.registerExtension({
-  name: "MyExtension",
+Extensions should export their configuration object:
+
+```typescript
+import type { ComfyExtension } from '@/types/comfy'
+
+const extension: ComfyExtension = {
+  name: 'Comfy.MyExtension',
   
   // Hook implementations
-  async init() {
+  async init(app) {
     // Implementation
   },
   
@@ -133,6 +149,33 @@ app.registerExtension({
   }
   
   // Other hooks as needed
+}
+
+export default extension
+```
+
+Then register it in `extensionManifest.ts`:
+
+```typescript
+{
+  id: 'myExtension',
+  name: 'Comfy.MyExtension',
+  description: 'My extension description',
+  category: 'ui',
+  activationEvents: ['onStartup'],
+  path: './myExtension',
+  defaultEnabled: true
+}
+```
+
+#### Legacy Pattern (Still Supported)
+
+Third-party extensions can still use the old pattern:
+
+```javascript
+app.registerExtension({
+  name: "MyExtension",
+  // ...
 });
 ```
 

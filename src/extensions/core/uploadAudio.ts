@@ -9,6 +9,7 @@ import type { ResultItemType } from '@/schemas/apiSchema'
 import type { ComfyNodeDef } from '@/schemas/nodeDefSchema'
 import type { DOMWidget } from '@/scripts/domWidget'
 import { useToastStore } from '@/stores/toastStore'
+import type { ComfyExtension } from '@/types/comfy'
 
 import { api } from '../../scripts/api'
 import { app } from '../../scripts/app'
@@ -85,7 +86,7 @@ async function uploadFile(
 
 // AudioWidget MUST be registered first, as AUDIOUPLOAD depends on AUDIO_UI to be
 // present.
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.AudioWidget',
   async beforeRegisterNodeDef(nodeType, nodeData) {
     if (
@@ -157,9 +158,11 @@ app.registerExtension({
       }
     }
   }
-})
+}
 
-app.registerExtension({
+const audioWidgetExtension = extension
+
+const uploadAudioExtension: ComfyExtension = {
   name: 'Comfy.UploadAudio',
   async beforeRegisterNodeDef(_nodeType, nodeData: ComfyNodeDef) {
     if (nodeData?.input?.required?.audio?.[1]?.audio_upload === true) {
@@ -240,4 +243,6 @@ app.registerExtension({
       }
     }
   }
-})
+}
+
+export const extensions = [audioWidgetExtension, uploadAudioExtension]

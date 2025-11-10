@@ -10,9 +10,9 @@ import { t } from '@/i18n'
 import { CustomInputSpec } from '@/schemas/nodeDef/nodeDefSchemaV2'
 import { api } from '@/scripts/api'
 import { ComponentWidgetImpl, addWidget } from '@/scripts/domWidget'
-import { useExtensionService } from '@/services/extensionService'
 import { useLoad3dService } from '@/services/load3dService'
 import { useToastStore } from '@/stores/toastStore'
+import type { ComfyExtension } from '@/types/comfy'
 
 async function handleModelUpload(files: FileList, node: any) {
   if (!files?.length) return
@@ -88,7 +88,7 @@ function createFileInput(
   return input
 }
 
-useExtensionService().registerExtension({
+const load3dExtension: ComfyExtension = {
   name: 'Comfy.Load3D',
   settings: [
     {
@@ -312,9 +312,9 @@ useExtensionService().registerExtension({
       }
     })
   }
-})
+}
 
-useExtensionService().registerExtension({
+const load3dAnimationExtension: ComfyExtension = {
   name: 'Comfy.Load3DAnimation',
 
   getCustomWidgets() {
@@ -448,9 +448,9 @@ useExtensionService().registerExtension({
       }
     })
   }
-})
+}
 
-useExtensionService().registerExtension({
+const preview3dExtension: ComfyExtension = {
   name: 'Comfy.Preview3D',
 
   async beforeRegisterNodeDef(_nodeType, nodeData) {
@@ -534,9 +534,9 @@ useExtensionService().registerExtension({
       }
     })
   }
-})
+}
 
-useExtensionService().registerExtension({
+const preview3dAnimationExtension: ComfyExtension = {
   name: 'Comfy.Preview3DAnimation',
 
   async beforeRegisterNodeDef(_nodeType, nodeData) {
@@ -620,4 +620,11 @@ useExtensionService().registerExtension({
       }
     })
   }
-})
+}
+
+export const extensions = [
+  load3dExtension,
+  load3dAnimationExtension,
+  preview3dExtension,
+  preview3dAnimationExtension
+]

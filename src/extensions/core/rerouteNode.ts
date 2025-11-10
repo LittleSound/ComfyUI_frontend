@@ -1,12 +1,13 @@
 import type { IContextMenuValue } from '@comfyorg/litegraph'
 import { LGraphCanvas, LGraphNode, LiteGraph } from '@comfyorg/litegraph'
 
-import { app } from '../../scripts/app'
+import type { ComfyExtension } from '@/types/comfy'
+
 import { getWidgetConfig, mergeIfValid, setWidgetConfig } from './widgetInputs'
 
 // Node that allows you to redirect connections for cleaner graphs
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.RerouteNode',
   registerCustomNodes(app) {
     interface RerouteNode extends LGraphNode {
@@ -317,4 +318,6 @@ app.registerExtension({
 
     RerouteNode.category = 'utils'
   }
-})
+}
+
+export default extension

@@ -1,11 +1,13 @@
 import { LiteGraph } from '@comfyorg/litegraph'
 
+import type { ComfyExtension } from '@/types/comfy'
+
 import { app } from '../../scripts/app'
 import { ComfyWidgets } from '../../scripts/widgets'
 
 // Adds defaults for quickly adding nodes with middle click on the input/output
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.SlotDefaults',
   suggestionsNumber: null,
   init() {
@@ -101,4 +103,6 @@ app.registerExtension({
       ].slice(0, maxNum)
     }
   }
-})
+}
+
+export default extension
