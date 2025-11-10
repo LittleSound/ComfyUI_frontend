@@ -1,10 +1,10 @@
-import { useExtensionService } from '@/services/extensionService'
+import type { ComfyExtension } from '@/types/comfy'
 import { processDynamicPrompt } from '@/utils/formatUtil'
 
 // Allows for simple dynamic prompt replacement
 // Inputs in the format {a|b} will have a random value of a or b chosen when the prompt is queued.
 
-useExtensionService().registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.DynamicPrompts',
   nodeCreated(node) {
     if (node.widgets) {
@@ -27,4 +27,6 @@ useExtensionService().registerExtension({
       }
     }
   }
-})
+}
+
+export default extension

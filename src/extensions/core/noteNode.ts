@@ -1,12 +1,14 @@
 import { LGraphCanvas, LiteGraph } from '@comfyorg/litegraph'
 import { LGraphNode } from '@comfyorg/litegraph'
 
+import type { ComfyExtension } from '@/types/comfy'
+
 import { app } from '../../scripts/app'
 import { ComfyWidgets } from '../../scripts/widgets'
 
 // Node that add notes to your project
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.NoteNode',
   registerCustomNodes() {
     class NoteNode extends LGraphNode {
@@ -77,4 +79,6 @@ app.registerExtension({
     LiteGraph.registerNodeType('MarkdownNote', MarkdownNoteNode)
     MarkdownNoteNode.category = 'utils'
   }
-})
+}
+
+export default extension

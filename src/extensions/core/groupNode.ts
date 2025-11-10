@@ -18,7 +18,7 @@ import { useDialogService } from '@/services/dialogService'
 import { useNodeDefStore } from '@/stores/nodeDefStore'
 import { useToastStore } from '@/stores/toastStore'
 import { useWidgetStore } from '@/stores/widgetStore'
-import { ComfyExtension } from '@/types/comfy'
+import type { ComfyExtension } from '@/types/comfy'
 import { ExecutableGroupNodeChildDTO } from '@/utils/executableGroupNodeChildDTO'
 import { GROUP } from '@/utils/executableGroupNodeDto'
 import { deserialiseAndCreate, serialise } from '@/utils/vintageClipboard'
@@ -1766,4 +1766,4 @@ const ext: ComfyExtension = {
   }
 }
 
-app.registerExtension(ext)
+export default ext

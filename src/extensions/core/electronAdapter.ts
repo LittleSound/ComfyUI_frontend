@@ -6,6 +6,7 @@ import { app } from '@/scripts/app'
 import { useDialogService } from '@/services/dialogService'
 import { useToastStore } from '@/stores/toastStore'
 import { useWorkflowStore } from '@/stores/workflowStore'
+import type { ComfyExtension } from '@/types/comfy'
 import { electronAPI as getElectronAPI, isElectron } from '@/utils/envUtil'
 import { checkMirrorReachable } from '@/utils/networkUtil'
 
@@ -24,7 +25,7 @@ import { checkMirrorReachable } from '@/utils/networkUtil'
     }
   }
 
-  app.registerExtension({
+  const extension: ComfyExtension = {
     name: 'Comfy.ElectronAdapter',
     settings: [
       {
@@ -298,5 +299,7 @@ import { checkMirrorReachable } from '@/utils/networkUtil'
         icon: 'pi pi-github'
       }
     ]
-  })
+  }
+
+  app.registerExtension(extension)
 })()

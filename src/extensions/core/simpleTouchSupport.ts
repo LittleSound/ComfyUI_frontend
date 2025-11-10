@@ -1,11 +1,13 @@
 import { LGraphCanvas, LiteGraph } from '@comfyorg/litegraph'
 
+import type { ComfyExtension } from '@/types/comfy'
+
 import { app } from '../../scripts/app'
 
 let touchZooming = false
 let touchCount = 0
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.SimpleTouchSupport',
   setup() {
     let touchDist: number | null = null
@@ -149,7 +151,7 @@ app.registerExtension({
       true
     )
   }
-})
+}
 
 const processMouseDown = LGraphCanvas.prototype.processMouseDown
 LGraphCanvas.prototype.processMouseDown = function (e: PointerEvent) {
@@ -167,3 +169,5 @@ LGraphCanvas.prototype.processMouseMove = function (e: PointerEvent) {
   }
   return processMouseMove.apply(this, [e])
 }
+
+export default extension

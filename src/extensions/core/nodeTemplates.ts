@@ -3,6 +3,7 @@ import { LGraphCanvas } from '@comfyorg/litegraph'
 import { t } from '@/i18n'
 import { useDialogService } from '@/services/dialogService'
 import { useToastStore } from '@/stores/toastStore'
+import type { ComfyExtension } from '@/types/comfy'
 import { deserialiseAndCreate } from '@/utils/vintageClipboard'
 
 import { api } from '../../scripts/api'
@@ -349,7 +350,7 @@ class ManageTemplates extends ComfyDialog {
   }
 }
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: id,
   setup() {
     const manage = new ManageTemplates()
@@ -455,4 +456,6 @@ app.registerExtension({
       return options
     }
   }
-})
+}
+
+export default extension

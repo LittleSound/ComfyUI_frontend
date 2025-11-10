@@ -6,9 +6,9 @@ upstream requested in https://github.com/Kosinkadink/rfcs/blob/main/rfcs/0000-co
 import { app } from '@/scripts/app'
 import { DOMWidget } from '@/scripts/domWidget'
 import { ComfyWidgets } from '@/scripts/widgets'
-import { useExtensionService } from '@/services/extensionService'
+import type { ComfyExtension } from '@/types/comfy'
 
-useExtensionService().registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.PreviewAny',
   async beforeRegisterNodeDef(nodeType, nodeData) {
     if (nodeData.name === 'PreviewAny') {
@@ -44,4 +44,6 @@ useExtensionService().registerExtension({
       }
     }
   }
-})
+}
+
+export default extension

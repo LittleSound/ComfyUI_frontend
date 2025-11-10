@@ -1,12 +1,13 @@
 import { t } from '@/i18n'
 import { useToastStore } from '@/stores/toastStore'
+import type { ComfyExtension } from '@/types/comfy'
 
 import { api } from '../../scripts/api'
 import { app } from '../../scripts/app'
 
 const WEBCAM_READY = Symbol()
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.WebcamCapture',
   getCustomWidgets() {
     return {
@@ -158,4 +159,6 @@ app.registerExtension({
       btn.label = t('g.capture')
     })
   }
-})
+}
+
+export default extension

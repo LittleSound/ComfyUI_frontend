@@ -3,8 +3,7 @@ import {
   InputSpec,
   isComboInputSpecV1
 } from '@/schemas/nodeDefSchema'
-
-import { app } from '../../scripts/app'
+import type { ComfyExtension } from '@/types/comfy'
 
 // Adds an upload button to the nodes
 
@@ -33,7 +32,7 @@ const createUploadInput = (
   }
 ]
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.UploadImage',
   beforeRegisterNodeDef(_nodeType, nodeData: ComfyNodeDef) {
     const { input } = nodeData ?? {}
@@ -50,4 +49,6 @@ app.registerExtension({
       required.upload = createUploadInput(inputName, inputSpec)
     }
   }
-})
+}
+
+export default extension

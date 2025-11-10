@@ -1,6 +1,7 @@
 import { debounce } from 'lodash'
 
 import { t } from '@/i18n'
+import type { ComfyExtension } from '@/types/comfy'
 
 import { api } from '../../scripts/api'
 import { app } from '../../scripts/app'
@@ -4951,7 +4952,7 @@ const context_predicate = (): boolean => {
   )
 }
 
-app.registerExtension({
+const extension: ComfyExtension = {
   name: 'Comfy.MaskEditor',
   settings: [
     {
@@ -5023,4 +5024,6 @@ app.registerExtension({
       openMaskEditor
     )
   }
-})
+}
+
+export default extension
